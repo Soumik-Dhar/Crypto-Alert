@@ -1,4 +1,5 @@
-import requests, json, conf, time
+import requests, json, conf, time, math, statistics
+data=[]
 
 """Getting current Bitcoin price in INR"""
 def get_bitcoin_price():
@@ -41,20 +42,59 @@ def send_telegram_message(message):
 		print(e)
 		return False
 
+"""Computing the upper and lower bounds of BTC prices using Z-score analysis"""
+def computeBounds(data,frameSize,factor):
+	if(len(data)<frameSize):
+		return None
+	if(len(data)>frameSize):
+		del data[0:(len(data)-frameSize)]
+		# Getting the mean
+	mn=statistics.mean(data)
+		# Getting the variance
+	var=0
+	for d in data:
+		var+=math.pow((d-mn),2)
+		# Computing Z-Score
+	zn=factor*math.sqrt(var/frameSize)
+		# Finding upper and lower bounds
+	upperBound=data[frameSize-1]+zn
+	lowerBound=data[frameSize-1]-zn
+	return([upperBound,lowerBound])
+
 """Driver function"""
 if __name__=="__main__":
+
 	while True:
 			# Getting current Bitcoin price
 		bitcoin_price = int(get_bitcoin_price())
-			# Creating the message to be sent
-		message = "Bitcoin price has crossed threshold limits! Current price is at INR "+ str(bitcoin_price)
-			# Sending alerts if price crosses threshold limits
+			# Computing Z-Score from bitcoin INR prices
+		bound=computeBounds(data,conf.FRAME_SIZE,conf.MUL_FACTOR)
+		if not bound:
+			data_count=conf.FRAME_SIZE-len(data)
+				# Creating the message to be sent to Telegram
+			message="""\n\t Not enough data to compute Z-score. \n\t Need """ + str(data_count) + """ more data points. 
+					\n\t Current Bitcoin price is INR """+ str(bitcoin_price)
+			print(message)
+			send_telegram_message(message)
+				# Adding bitcoin prices to the list
+			data.append(bitcoin_price)
+			time.sleep(10)
+			continue
+			# Sending alerts if price suddenly crosses threshold limits
 		try:
-			if(bitcoin_price <= 600000 or bitcoin_price >= 615000):
+			if(bitcoin_price>bound[0]):
+				message="\n\t ALERT! Current Bitcoin price [INR "+ str(bitcoin_price) +"] has crossed upper threshold limits!" 
+				print(message)
+				send_telegram_message(message)
+				break
+			elif(bitcoin_price<bound[1]):
+				message="\n\t ALERT! Current Bitcoin price [INR "+ str(bitcoin_price) +"] has crossed lower threshold limits!" 
+				print(message)
 				send_telegram_message(message)
 				break
 		except Exception as e:
-			print("\n\t Something went wrong! [Details below]")
-			print(e)
+				# Displaying error details
+		 	print("\n\t Something went wrong! [Details below]")
+		 	print(e)
 			# Delaying for 10 seconds
 		time.sleep(10)		
