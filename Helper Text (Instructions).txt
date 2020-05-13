@@ -1,10 +1,9 @@
-#This project uses APIs from cryptocompare.com and the Telegram application to send 
-#alerts whenever the Bitcoin price (in INR) suddenly spikes (using Z-score analysis).
+This project uses APIs from cryptocompare.com and the Telegram application to send alerts whenever the Bitcoin price (in INR) suddenly spikes (using Z-score analysis).
 
 Instructions for using the module:
 
-1. In the conf.py file replace chat_id and bot_id with your channel's respective ids.
-2. Follow the instructions for telegram app to get your chat_id and bot_id
+1. In the conf.py file replace CHAT_ID and BOT_ID with your channel's respective ids.
+2. Follow the instructions for telegram app to get your CHAT_ID and BOT_ID
 
 Instructions for telegram app:
 
@@ -21,6 +20,5 @@ Instructions for telegram app:
 11. Select all priviledes for the bot except the "Add New Admin" privedge and proceed.
 
 # Replace the following in the conf.py as follows:
-
-Bot_ID = bot+http api key (like - bot987637509:AAF5dQ8kbpVx4kKtd_Tn2cS1gFIxBrKYxF8)
-Chat_ID = @+channel permanent link name ( like - @testChannelLink1234 )
+CHAT_ID = @+channel permanent link name ( like - @testChannelLink1234 )
+BOT_ID = bot+http api key (like - bot987637509:AAF5dQ8kbpVx4kKtd_Tn2cS1gFIxBrKYxF8)
