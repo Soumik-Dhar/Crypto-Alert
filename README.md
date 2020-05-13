@@ -10,7 +10,7 @@ This project uses APIs from cryptocompare.com and the Telegram application to se
 
 ![code-running-on-terminal](images/running.png)
 
-### Using Crypto-alert
+## Using Crypto-alert
 
 >From the command line, execute the following commands:
 
@@ -23,13 +23,13 @@ $ git clone https://github.com/Soumik-Dhar/Crypto-Alert.git
 $ cd Crypto-Alert
 ```
 
-#### Instructions for using the module:
+### Instructions for using the module:
 
 1. Rename the "sample-conf.py" file in the code folder to "conf.py"
 2. In the conf.py file, replace CHAT_ID and BOT_ID with your channel's respective ids.
 3. Follow the instructions for telegram app to get your CHAT_ID and BOT_ID
 
-#### Instructions for setting up the Telegram app:
+### Instructions for setting up the Telegram app:
 
 1. Download the "telegram" app from google play store.
 2. Open telegram app and from the menu options select "new channel" option.
@@ -43,7 +43,7 @@ $ cd Crypto-Alert
 10. Now search for the name of the bot that you just created in BotFather and select it.
 11. Select all priviledes for the bot except the "Add New Admin" privedge and proceed.
 
-#### Replace the following in the conf.py as follows:
+### Replace the following in the conf.py as follows:
 
 * CHAT_ID = @+channel permanent link name ( like - @testChannelLink1234 )
 * BOT_ID = bot+http api key (like - bot987637509:AAF5dQ8kbpVx4kKtd_Tn2cS1gFIxBrKYxF8)
