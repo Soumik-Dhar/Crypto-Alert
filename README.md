@@ -29,6 +29,8 @@ $ cd Crypto-Alert
 2. In the conf.py file, replace CHAT_ID and BOT_ID with your channel's respective ids.
 3. Follow the instructions for telegram app to get your CHAT_ID and BOT_ID
 
+---
+
 ### Instructions for setting up the Telegram app:
 
 1. Download the "telegram" app from google play store.
@@ -42,6 +44,8 @@ $ cd Crypto-Alert
 9. Now go to the channel that you created (i.e. testChannel) and select the "Administrators" option and then click on "Add Admin".
 10. Now search for the name of the bot that you just created in BotFather and select it.
 11. Select all priviledes for the bot except the "Add New Admin" privedge and proceed.
+
+---
 
 ### Replace the following in the conf.py as follows:
 
